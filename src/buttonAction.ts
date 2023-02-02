@@ -1,46 +1,40 @@
-class House {
-	private tenants: string[] = [];
+abstract class Plane {
+	protected isPilotInCabine = false;
 
-	constructor(private readonly street: string, public readonly type: string) {}
-
-	public showAddress(this: House): void {
-		console.log("Address", this.street);
+	sitInCabine(): void {
+		this.isPilotInCabine = true;
 	}
 
-	public showType(this: House): void {
-		console.log("Type", this.type);
-	}
+	abstract showPilots(): void;
 
-	public addTenant(tenant: string): void {
-		this.tenants.push(tenant);
-	}
+	abstract startEngine(): void;
+}
 
-	public showTenants(): void {
-		console.log(this.tenants);
+class Maize extends Plane {
+	showPilots(): void {
+		console.log("Пілот на місці");
+	}
+	startEngine(): void {
+		console.log("ta-ta-ta-ta");
 	}
 }
 
-const house = new House("A", "Wood");
-console.log(house);
-
-class StoneHouse extends House {
-	private host: string;
-	constructor(street: string, host: string) {
-		super(street, "stone");
-
-		this.host = host;
+class Boieng extends Plane {
+	showPilots(): void {
+		console.log("Команда пілотів на місці");
 	}
-
-	public showTenants(): void {
-		console.log("General: ", this.host);
-
-		super.showTenants();
-	}
-
-	public showAddress(): void {
-		// console.log("Stone House Address", this.street);
+	startEngine(): void {
+		console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
 	}
 }
 
-const stoneHouse = new StoneHouse("Kuku", "Roman");
-console.log(stoneHouse);
+const maize = new Maize();
+const boieng = new Boieng();
+
+maize.sitInCabine();
+maize.showPilots();
+maize.startEngine();
+
+boieng.sitInCabine();
+boieng.showPilots();
+boieng.startEngine();
