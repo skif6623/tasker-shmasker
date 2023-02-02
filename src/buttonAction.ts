@@ -1,40 +1,60 @@
-abstract class Plane {
-	protected isPilotInCabine = false;
+abstract class House {
+	protected door: "open" | "close" = "close";
+	protected key: Key;
+	private tenants: Person[] = [];
 
-	sitInCabine(): void {
-		this.isPilotInCabine = true;
+	constructor(key: Key) {
+		this.key = key;
 	}
 
-	abstract showPilots(): void;
-
-	abstract startEngine(): void;
+	comeIn(person: Person) {
+		if (this.door === "close") {
+			console.log("Двері закриті");
+		}
+		if (this.door === "open") {
+			this.tenants.push(person);
+			console.log("Увійшов в дім");
+		}
+	}
+	abstract openDoor(key: Key): void;
 }
 
-class Maize extends Plane {
-	showPilots(): void {
-		console.log("Пілот на місці");
-	}
-	startEngine(): void {
-		console.log("ta-ta-ta-ta");
-	}
-}
-
-class Boieng extends Plane {
-	showPilots(): void {
-		console.log("Команда пілотів на місці");
-	}
-	startEngine(): void {
-		console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+class MyHouse extends House {
+	openDoor(key: Key): void {
+		if (key === this.key) {
+			this.door = "open";
+		}
 	}
 }
 
-const maize = new Maize();
-const boieng = new Boieng();
+class Key {
+	private signature: number;
 
-maize.sitInCabine();
-maize.showPilots();
-maize.startEngine();
+	constructor() {
+		this.signature = Math.random();
+	}
 
-boieng.sitInCabine();
-boieng.showPilots();
-boieng.startEngine();
+	getSignature() {
+		return this.signature;
+	}
+}
+
+class Person {
+	key: Key;
+
+	constructor(key: Key) {
+		this.key = key;
+	}
+
+	getKey(): Key {
+		return this.key;
+	}
+}
+
+const key = new Key();
+console.log(key);
+const myHouse = new MyHouse(key);
+console.log(myHouse);
+const person = new Person(key);
+myHouse.openDoor(person.getKey());
+myHouse.comeIn(person);
