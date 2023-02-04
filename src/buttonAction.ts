@@ -114,20 +114,99 @@
 // 	return Object.assign(objA, objB);
 // }
 
-interface IObj {
-	title: string;
+// interface IObj {
+// 	title: string;
+// }
+
+// class Component<T> {
+// 	constructor(public props: T) {}
+// }
+
+// class Page extends Component<IObj> {
+// 	pageInfo() {
+// 		console.log(this.props.title);
+// 	}
+// }
+
+// const page = new Page({title: "Roman"});
+// page.pageInfo();
+// console.log(page.props.title);
+
+// function Logger(logString: string) {
+// 	return function (constructor: Function) {
+// 		console.log(logString);
+// 		console.log(constructor);
+// 	};
+// }
+
+// @Logger("LOGGING - CONTROLLER")
+// class Controller {
+// 	public id = 1;
+// }
+
+// const cont = new Controller();
+// function Logger(a: string) {
+// 	return function (constructor: Function) {
+// 		console.log(a);
+// 		console.log("Конструктор це клас з яким викликаємо дескриптор", constructor);
+// 	};
+// }
+
+// function OpenWindow(a: boolean) {
+// 	return function (constructor: Function) {
+// 		constructor.prototype.window = a;
+// 	};
+// }
+
+// @Logger("Loading")
+// @OpenWindow(true)
+// class House {
+// 	protected door: "close" | "open";
+// 	window = false;
+
+// 	constructor(door: "close" | "open") {
+// 		this.door = door;
+// 	}
+// }
+
+// const house = new House("open");
+// console.log("Window is open:", house.window);
+
+interface IDecoration {
+	parent: string;
+	template: string;
 }
 
-class Component<T> {
-	constructor(public props: T) {}
+const config: IDecoration = {
+	parent: "app",
+	template: "H1",
+};
+
+function ControllerDecoration(config: IDecoration) {
+	return function <T extends {new (...arg: any[]): {content: string}}>(originConstructor: T) {
+		return class extends originConstructor {
+			private element: HTMLElement;
+			private parent: HTMLElement;
+
+			constructor(...arg: any[]) {
+				super(...arg);
+
+				this.parent = document.getElementById(config.parent)!;
+				this.element = document.createElement(config.template);
+
+				this.element.innerHTML = this.content;
+
+				this.parent.appendChild(this.element);
+			}
+		};
+	};
 }
 
-class Page extends Component<IObj> {
-	pageInfo() {
-		console.log(this.props.title);
-	}
+@ControllerDecoration(config)
+class Controller {
+	constructor(public content: string) {}
 }
 
-const page = new Page({title: "Roman"});
-page.pageInfo();
-console.log(page.props.title);
+const controller = new Controller("rere");
+const controller2 = new Controller("куку");
+const controller3 = new Controller("привіт");
