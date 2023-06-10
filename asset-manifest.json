@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tasker-shmasker/static/css/main.e6c13ad2.css",
+    "main.js": "/tasker-shmasker/static/js/main.7914f931.js",
+    "index.html": "/tasker-shmasker/index.html",
+    "main.e6c13ad2.css.map": "/tasker-shmasker/static/css/main.e6c13ad2.css.map",
+    "main.7914f931.js.map": "/tasker-shmasker/static/js/main.7914f931.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.7914f931.js"
+  ]
+}
