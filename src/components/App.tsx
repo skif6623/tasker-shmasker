@@ -1,5 +1,6 @@
 import React from 'react';
+import { Card } from './Card/Card';
 
 export const App = () => {
-  return <div>Hello world</div>;
+  return <Card />;
 };
