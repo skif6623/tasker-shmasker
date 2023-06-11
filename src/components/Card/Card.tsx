@@ -1,13 +1,16 @@
 import React from 'react';
-import { CardWrapper } from './Card.styled';
+import { CardWrapper, CardTitle, CardDescription } from './Card.styled';
+import { Box } from '../../Box';
 
 export const Card = () => {
   return (
     <CardWrapper>
-      <h2>Task 1</h2>
-      <p>Go to walk the dog</p>
-      <p>Task: House Work</p>
-      <p>Date: 11.06.2023</p>
+      <CardTitle>Walk the dog</CardTitle>
+      <CardDescription>Go to walk the dog in Hill of glory</CardDescription>
+      <Box display="flex">
+        <p>Type: House Work</p>
+        <p>Date: 11.06.2023</p>
+      </Box>
     </CardWrapper>
   );
 };
