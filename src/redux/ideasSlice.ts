@@ -17,8 +17,8 @@ export const ideaSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchIdeas.fulfilled, (state, action) => {
-      state = action.payload;
+    builder.addCase(fetchIdeas.fulfilled, (_, action) => {
+      return action.payload;
     });
   },
 });

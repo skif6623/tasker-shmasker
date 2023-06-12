@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card } from './Card/Card';
+import { MainPage } from '../pages/MainPage';
 
 export const App = () => {
-  return <Card />;
+  return <MainPage />;
 };
