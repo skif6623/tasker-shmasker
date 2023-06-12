@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 300px;
   height: 250px;
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;

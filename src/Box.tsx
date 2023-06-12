@@ -1,14 +1,28 @@
+import React from 'react';
 import styled from 'styled-components';
 import {
   space,
+  SpaceProps,
   color,
+  ColorProps,
   layout,
+  LayoutProps,
   flexbox,
-  grid,
   FlexboxProps,
+  grid,
+  GridProps,
 } from 'styled-system';
 
-export const Box = styled.div<FlexboxProps>(
+interface BoxProps
+  extends SpaceProps,
+    ColorProps,
+    LayoutProps,
+    FlexboxProps,
+    GridProps {
+  children: React.ReactNode;
+}
+
+export const Box = styled.div<BoxProps>(
   {
     boxSizing: 'border-box',
     minWidth: 0,
